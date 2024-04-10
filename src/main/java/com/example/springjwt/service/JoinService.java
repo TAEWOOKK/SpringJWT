@@ -18,7 +18,7 @@ public class JoinService {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    public void joinProcess(JoinDTO joinDTO) {
+    public void joinProcess(JoinDTO joinDTO){
 
         String username = joinDTO.getUsername();
         String password = joinDTO.getPassword();
