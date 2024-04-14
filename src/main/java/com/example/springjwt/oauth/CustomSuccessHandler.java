@@ -12,6 +12,8 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -39,8 +41,8 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 
         String token = jwtUtil.createJwt(username, role, 60*60*1000L);
 
-        response.addCookie(createCookie("Authorization", token));
-        response.sendRedirect("http://localhost:8081/");
+        response.addCookie(createCookie("Authorization",token));
+        response.sendRedirect("http://localhost:63342/front/index.html");
     }
 
     private Cookie createCookie(String key, String value){

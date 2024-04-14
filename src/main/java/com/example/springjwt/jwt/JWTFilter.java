@@ -15,6 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 public class JWTFilter extends OncePerRequestFilter {
 
@@ -36,13 +37,15 @@ public class JWTFilter extends OncePerRequestFilter {
         if (authorization == null || !authorization.startsWith("Bearer ")) {
 
             Cookie[] cookies = request.getCookies();
+            System.out.println("쿠키"+Arrays.toString(cookies));
             if(cookies != null){
                 for (Cookie cookie : cookies) {
 
                     System.out.println(cookie.getName());
                     if (cookie.getName().equals("Authorization")) {
 
-                        authorization = cookie.getValue();
+                        authorization = "Bearer "+cookie.getValue();
+
                         oauth = "oauth";
                     }
                 }
@@ -54,7 +57,7 @@ public class JWTFilter extends OncePerRequestFilter {
                 filterChain.doFilter(request, response);
 
                 //조건이 해당되면 메소드 종료 (필수)
-                return;
+                return ;
             }
         }
 
